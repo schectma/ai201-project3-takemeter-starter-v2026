@@ -51,61 +51,61 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Correct label most of the time.
 
 <!-- Your criterion. It must name a number. -->
+Label matches contents 4 out of 5 times.
 
 
-
-**Why this target:**
-
-
-
----
-
-## 2.
-
-<!-- Your criterion. -->
-
-
-
-**Why this target:**
+**Why this target:** Some posts are connotatively ambiguous relative to one label. 100% not guaranteed.
 
 
 
 ---
 
-## 3.
+## 2. Complaint can be slightly worse.
 
 <!-- Your criterion. -->
+Labeling for complaint can miss on up to 2 in 5 posts.
 
 
-
-**Why this target:**
+**Why this target:** Nature of many posts usually borders on complaint but sometimes just shares enough language to make it seem that way. This one may understandably fail ~40% of the time.
 
 
 
 ---
 
-## 4.
+## 3. Label counts should be roughly even.
 
 <!-- Your criterion. -->
+Ratio of complaint/meal should be no greater than 5/4.
 
 
-
-**Why this target:**
+**Why this target:** Small portion of posts (up to 25%) may be missing meal text.
 
 
 
 ---
 
-## 5.
+## 4. Labels should always be objectively appropriate.
 
 <!-- Your criterion. -->
+100% posts must contain some verbiage or vernacular attributable to its label.
+
+
+**Why this target:** Language tends to be very strong in this community. It's reasonable to expect the model to pick up on at least one or two relevant words.
 
 
 
-**Why this target:**
+---
+
+## 5. Confident assumptions should almost always be correct.
+
+<!-- Your criterion. -->
+9 times out of 10, a confident label should be easily defensible.
+
+
+**Why this target:** There's not much tonal variety among these posts, so even with the aforementioned connotative ambiguity there should be enough to make a reasonably good assumption about the nature of most.
 
 
 

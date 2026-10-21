@@ -104,19 +104,21 @@ Some posts cite a number of days, months, or years. Some posts reference immedia
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** https://www.reddit.com/r/GirlDinnerDiaries/
 
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+Say so plainly — the disclosure is required, not penalised. --> Complaint and meal are just two categories common among posts in the selected community. Two easily observable traits across nearly all examples.
 
-**Counts per label:**
+**Counts per label:** 
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| complaint | 141 | 63.8% |
+| meal | 80 | 36.2% |
+| **Total** | 221 | 100% |
+
+238 posts were collected. One mod announcement and the sidebar welcome text were removed because they aren't posts. 15 posts that fit neither label (no grievance and no dish) were dropped rather than forced into one.
+
 
 **Three hard cases**
 
@@ -124,25 +126,26 @@ Say so plainly — the disclosure is required, not penalised. -->
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* "Last dinner before I go to jail.." It opens with "My sweet boyfriend made some tie dye ravioli with brie/ricotta and apple, and focaccia last night. I'll be turning myself in at 4:30 to begin my ten day sentence.." An update added later says: "obviously the food was terrible… Fucking terrible dude, I definitely never want to go back."
 >
-> *Could have been:*
+> *Could have been:* `meal` or `complaint`
 >
-> *I chose, because:*
+> *I chose, because:* `complaint`. The original post is a named dish plus a calm, almost cheerful sentence, so on its own it's a `meal`. The update airs a real grievance about jail (lockdown hours, the food, two pairs of underwear), and the decision rule says a complaint wins even when there's a meal. The same post would get a different label if it had been collected before the edit.
 
 **2.**
-> *The post:*
+> *The post:* "My partner made me an app." It opens with "Dinner: honey garlic tofu with rice & spicy mayo." It mentions "I was complaining that an app I genuinely found useful pivoted to an ad-based/monthly subscription model… I hated ads popping up every 10 seconds," then spends the rest of the post on how their partner rebuilt the app for them.
 >
-> *Could have been:*
+> *Could have been:* `complaint` or `meal`
 >
-> *I chose, because:*
+> *I chose, because:* `meal`. The post literally contains a complaint, so a strict reading of "has a complaint" says `complaint`. But the grievance is backstory that the post resolves; the author isn't airing it, they're celebrating. This case showed me the rule needs a threshold: a complaint counts only if the author is airing it in this post, not just reporting one they once had.
 
 **3.**
-> *The post:*
+> *The post:* "Why am I so exhausted from people in my life." It opens with "Plum while I do the laundry today ✨." Then: "I have been finding myself exhausted by others. Like the constant need to see me and do things with me just makes me feel so overwhelmed… I feel like I am selfish for having this distance with my family."
 >
-> *Could have been:*
+> *Could have been:* `complaint` or `meal`
 >
-> *I chose, because:*
+> *I chose, because:* `complaint`. Half the post is guilt and asking whether this is normal, which reads more like seeking support than complaining. But the title and the core of the post express frustration with the family's demands on their time, and frustration is in the `complaint` definition. Guilt about the frustration doesn't cancel it.
+
 
 ---
 
@@ -185,7 +188,8 @@ of next unit's variance. -->
 - *What came back:*
 - *What I changed:*
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** All 221 rows were first labelled by AI (Claude), applying my two label definitions and my decision rule exactly as written in this README. 201 rows were labelled by Claude subagents in four batches. The other 20, originally set aside as my cold set, were labelled by Claude directly, so **no rows were labelled cold, without AI**. Posts the AI judged to fit neither label were flagged `neither` and removed. The `note` column records this for every row (`pre-labelled` or `AI-labelled (was cold set)`), along with a short reason and a `HARD` flag where a different label was defensible. I then read and corrected every row myself, and changed each note to `checked`.
+
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 

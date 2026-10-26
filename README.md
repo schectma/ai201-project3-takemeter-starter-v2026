@@ -229,30 +229,28 @@ of next unit's variance. -->
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
-| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-|---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.647 | 0.647 | 0.647 | 0.000 |
+| Macro F1 | 0.393 | 0.393 | 0.393 | 0.000 |
+| F1 — `complaint` | 0.786 | 0.786 | 0.786 | 0.000 |
+| F1 — `meal` | 0.000 | 0.000 | 0.000 | 0.000 |
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| true \ predicted | complaint | meal |
+|---|---|---|
+| **complaint** | 22 | 0 |
+| **meal** | 12 | 0 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
-
+     12 real `meal` posts called `complaint`. Again due to presence of `meal` qualifiers in `complaint` data.
 
 
 ---

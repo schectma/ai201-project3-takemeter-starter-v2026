@@ -203,20 +203,22 @@ of next unit's variance. -->
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
      prints this table for you. -->
 
-| Measure | Baseline | Trained | Difference |
-|---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Measure | Baseline |
+|---|---|
+| Overall accuracy | 0.765 |
+| Macro F1 | 0.698 |
+| F1 — `complaint` | 0.840 |
+| F1 — `meal` | 0.556 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+     Trained model will probably be less accurate. Predicting it'll conflate most meals for complaints.
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+     Did a bit worse, as predicted. Mainly due to ambiguity of some content within data set and absence of delineating qualities to tip perception in either direction.     
 
 
 

@@ -1,0 +1,41 @@
+{
+  "seed": 42,
+  "n_test": 34,
+  "accuracy": 0.6470588235294118,
+  "f1_macro": 0.39285714285714285,
+  "per_label": {
+    "complaint": {
+      "precision": 0.6470588235294118,
+      "recall": 1.0,
+      "f1": 0.7857142857142857,
+      "support": 22
+    },
+    "meal": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 12
+    }
+  },
+  "confusion": {
+    "complaint": {
+      "complaint": 22,
+      "meal": 0
+    },
+    "meal": {
+      "complaint": 12,
+      "meal": 0
+    }
+  },
+  "confidence": {
+    "mean_when_right": 0.6624332070350647,
+    "mean_when_wrong": 0.664997935295105,
+    "accuracy_most_confident_third": 0.5454545454545454,
+    "accuracy_least_confident_third": 0.6363636363636364,
+    "n_per_third": 11
+  },
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "torch_version": "2.11.0+cu128",
+  "max_length": 128
+}

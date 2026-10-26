@@ -291,7 +291,7 @@ of next unit's variance. -->
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -313,25 +313,40 @@ of next unit's variance. -->
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+None. `python agreement.py` compared all 30 posts: 30 agreed, 0 disagreed
+(see `agreement_results.json`). With nothing to adjudicate, here are the
+borderline posts staff flagged as hard, and how the decision rules settled
+each one the same way for both of us:
 
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+- **sp_005**, *"Carbon plates aren't the whole story. My times dropped 2% in
+  the shoes and another 2% the following year…"*. Both said `analysis`. The
+  opening clause reads like a hot take, but the two comparable 2% drops plus
+  the mileage change are what carry the argument (rule 1).
+- **sp_014**, *"Times are down about 3% since the shoe rules changed, so
+  obviously the shoes are the whole story…"*. Both said `hot_take`. This is
+  the canonical rule-1 case: "so obviously" does the work, and the 3% is
+  decoration.
+- **sp_019**, *"Nobody actually enjoys the long run…"*. Both said
+  `hot_take`. It sounds reflective, but it makes a general claim about
+  everyone, not a report of the writer's own run (rule 2).
+- **sp_028**, *"Third DNF this year. I don't really want to talk about
+  it…"*. Both said `reaction`. "Third this year" is countable, but nothing is
+  argued from it, so rule 3 doesn't lift it to `analysis`.
+- **sp_029**, *"Just realised the shoes I set every PB in this year are the
+  ones I bought by accident in the wrong size."*. Both said `reaction`. It
+  reports the writer's own realisation now; it is not a general claim about
+  shoes (rule 2).
 
 **What the pattern in my disagreements tells me:**
+
+There is no pattern, because there were no disagreements. I think that says
+more about this set than about my consistency. The 30 posts fall into three
+clean blocks of 10, and even the "hard" ones resolve cleanly once the decision
+rules are applied in order (1, then 2, then 3). I never needed the rule-4
+tie-break. So the staff rules are tight: each boundary has an explicit test
+(is the fact load-bearing? is it about the writer or the world?). A perfect
+score here does not show that my own 200 labels are consistent. My own
+taxonomy has no rules this explicit, so that question needs its own evidence.
 
 
 

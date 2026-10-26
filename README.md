@@ -236,6 +236,19 @@ of next unit's variance. -->
 | F1 — `complaint` | 0.786 | 0.786 | 0.786 | 0.000 |
 | F1 — `meal` | 0.000 | 0.000 | 0.000 | 0.000 |
 
+All three seeds ran on an NVIDIA GeForce RTX 3060 Laptop GPU (CUDA, torch
+2.11.0+cu128), with 34 test posts per seed (22 `complaint`, 12 `meal`).
+
+**Run log — five criteria, three seeds** (from `results_three_seeds_before.json`):
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+|---|---|---|---|---|---|
+| 1. Correct label most of the time (accuracy) | ≥ 0.80 | 0.647 | 0.647 | 0.647 | MISSED |
+| 2. `complaint` misses ≤ 2 in 5 (recall / precision) | ≥ 0.60 | 1.00 / 0.647 | 1.00 / 0.647 | 1.00 / 0.647 | MET |
+| 3. Predicted `complaint` : `meal` ratio | ≤ 5:4 (1.25) | 34 : 0 | 34 : 0 | 34 : 0 | MISSED |
+| 4. Every label appropriate to its post | 1.00 (34/34) | 0.647 (22/34) | 0.647 (22/34) | 0.647 (22/34) | MISSED |
+| 5. Confident labels correct (accuracy, most-confident third) | ≥ 0.90 | 0.545 | 0.727 | 1.000 | MISSED |
+
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
@@ -262,13 +275,73 @@ of next unit's variance. -->
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Label matches contents 4 out of 5 times | accuracy ≥ 0.80 | MISSED | 0.647 on all three seeds. That is 22/34, exactly the share of `complaint` in the test split, and below target every time. |
+| 2 | `complaint` can miss on up to 2 in 5 posts | recall and precision ≥ 0.60 | MET | Recall was 1.00 and precision 0.647 on all three seeds, so it holds on both readings of "miss". It is a hollow pass: the model calls *every* post `complaint`, so it cannot miss one. |
+| 3 | `complaint`/`meal` ratio no greater than 5/4 | ≤ 1.25 | MISSED | The model predicted 34 `complaint` and 0 `meal` on every seed, so the ratio is undefined. The true split misses too: 22/12 = 1.83 in test and 141/80 = 1.76 across all 221 labels. |
+| 4 | 100% of posts carry verbiage attributable to their label | 34/34 | MISSED | I measured it as "the predicted label is one I'd defend for that post", using my own labels as the reference. The 12 `meal` posts labelled `complaint` fail that on every seed, giving 22/34. |
+| 5 | 9 in 10 confident labels easily defensible | ≥ 0.90 on the most-confident third | MISSED | 0.545, 0.727 and 1.000, based on 11 posts per third. It reached 0.90 on only one seed, and the target has to hold on all three. |
 
 **Diagnoses**
+
+The four misses share one root cause: **the model never learned the task. It
+learned only the label frequencies.** Four pieces of evidence:
+
+- **Every seed gives identical scores** (0.647 accuracy, 0.393 macro F1,
+  0.786 / 0.000 per label). With real learning, different training splits
+  would shift the numbers. These don't move because the output never depends
+  on the post.
+- **Training loss stalled at the class-prior entropy.** Every seed ends at
+  loss ≈ 0.64–0.65. A model that always outputs 64% `complaint` / 36% `meal`
+  (my 141/80 split) scores −(0.64 ln 0.64 + 0.36 ln 0.36) ≈ 0.65, so the
+  model got no further than that prior.
+- **Confidence is the prior too.** Mean confidence is 0.66 when right and
+  0.65–0.66 when wrong on every seed. That is about 22/34, so confidence does
+  not separate right answers from wrong ones.
+- **The task is learnable from these definitions.** The zero-shot baseline
+  on the same 34 posts gets 0.765 accuracy and F1 0.556 on `meal`. The text
+  separates the labels; my fine-tune just didn't pick that up.
+
+Per miss:
+
+1. **Criterion 1 (accuracy), cause: the model can't reach the task with this
+   much data and training.** About 150 training posts with batch 16 and
+   3 epochs is roughly 30 optimiser steps at lr 2e-5. That isn't enough to move
+   off the majority class (see the loss evidence above). The 0.647 is
+   the majority-class rate, not a measurement of the model.
+2. **Criterion 3 (ratio), cause: too few `meal` examples, plus a target that
+   my own data already misses.** `meal` is 80 of 221 rows (36%). That imbalance
+   is what made "always `complaint`" the cheapest guess for the loss. The ratio
+   of my own labels is 1.76, so even a perfect model would miss a 1.25 target.
+   The gap comes from my labelling, not from the model.
+3. **Criterion 4 (appropriate label), cause: same collapse as criterion 1.**
+   All 22 failures are the 12 `meal` posts per seed labelled `complaint`, the
+   single off-diagonal cell in the confusion matrix. No `complaint` post was
+   ever wrong.
+4. **Criterion 5 (confidence), cause: the confidence carries no information.**
+   Confidence sits near the prior for every post, so which 11 posts land in
+   the "most confident" third is close to arbitrary. That is why it swings
+   from 0.545 to 1.000 across seeds. On 11 posts, one post moves the score
+   by 9 points.
+
+**Is it my labelling or the model? Using the agreement report.** I matched
+staff on 30/30 posts under the staff taxonomy, including all 7 posts they
+flagged HARD (see Agreement Report). When a written boundary has an explicit
+test, I apply it the same way every time. That makes inconsistent labelling
+an unlikely *primary* cause here. The other evidence points the same way: the
+model doesn't confuse borderline posts, it ignores the text entirely, and
+inconsistent labels wouldn't cause that. Two caveats keep labelling in play as
+a *secondary* cause:
+
+- The staff set tests a different taxonomy, not my `complaint`/`meal`
+  boundary.
+- My own notes flag 108 of 221 rows `HARD`, including 46 of 80 `meal` rows
+  (58%).
+
+So `complaint`/`meal` is a genuinely hard pair, since most meal posts also
+gripe about the meal. Once the model trains properly, I expect that overlap to
+be where the remaining errors are. The fix this points to is training (more
+epochs or a higher learning rate), or more `meal` examples, before any
+relabelling.
 
 <!-- For each miss: the cause, and how you know. The four common causes are:
      too few examples for a label, a boundary you applied inconsistently, a
